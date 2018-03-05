@@ -1,31 +1,16 @@
-#include<stdio.h>
-//#include<stdlib.h>
-//#include<conio.h>
+void swapping1(double *p1,double *p2);
+void swapping(int *p1, int *p2);
 
 
-struct sjfprocess
-{
-    int processid,arrivaltime,bursttime;
-};
+main()
+{   int completiontime[30];
+    struct sjfprocess pro[50];
+    int arrivaltime,bursttime;
 
+    int i,n;
+	printf("Enter no. of process\n");
+    scanf("%d",&n);
+    int turnaroundtime[n],waitingtime[n];
 
+    printf("Enter Arrival time & Burst time for every process\n");
 
-void sorting(double array[],int array1[] ,int n);
-
-void sorting1(struct sjfprocess *t,int p)
-{
-	int i,j;
-	struct sjfprocess *q ,s;
-	for(i=0;i<p;i++,t++)
-	{
-		for(j=i+1,q=t+1;j<p;j++,q++)
-		{
-			if((t->arrivaltime)>(q->arrivaltime))
-				{
-					s=*t;
-					*t=*q;
-					*q=s;
-				}
-		}
-	}
-}

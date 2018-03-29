@@ -1,30 +1,53 @@
-for(i=0;i<n;i++)
-    {
-        printf("Enter process ID for process %d : ", i+1);
-        scanf("%d",&pro[i].processid);
-        printf("\n Arrival time for P%d : ",i+1);
-        scanf("%d",&pro[i].arrivaltime);
-        printf("\n Burst time for P%d   : ",i+1);
-        scanf("%d",&pro[i].bursttime);
-    }
-    system("cls");
-	int v=n-1;
-	sorting1(pro,n);
-	int array1[n],array2[n];
-	int array3[n];
-	int r;
-
-	printf("\n\nProcessId\tArrival time\tBurst time\t\n");
-	for(i=0;i<n;i++)
+	if(0==pro[0].arrivaltime)
 	{
-		printf("\n%d\t\t%d\t\t%d\n",pro[i].processid,pro[i].arrivaltime,pro[i].bursttime);//tat and wt
-		array1[i]=pro[i].processid;
+	//printf(" 0 ");
 	}
-	for(i=0;i<n-1;i++)
+	else
 	{
-		array2[i]=array1[i+1];
+		//printf(" 0  %d",pro[0].arrivaltime);
+		t=t+pro[0].arrivaltime;
 	}
+	t=t+pro[0].bursttime;
+	//printf("  P%d  %d",pro[0].processid,t);
+	completiontime[1]=t;
 
-	//printf("\n\n\t\t\tGANTT CHART OF THE PROCESS ACCORDING TO GIVEN PRIORITY\n\n\t\t\t"); //printing gantt chart
-	int m=n-1;
-	int t=0;
+    do
+	{
+		int tmp=0,j,u;
+		for( j=0;j<m;j++)
+		{
+			for( u=0;u<n;u++)
+			{
+				if(array2[j]==pro[u].processid)
+				{
+					if(pro[u].arrivaltime<=t)
+					{
+						array3[tmp++]=pro[u].processid;
+					}
+				}
+			}
+		}
+		int tmp1=tmp+1;
+		double array4[tmp1];
+		int tmp2=4,k,o;
+		int index=0;
+		double min=100;
+		for( k=0;k<tmp1-1;k++)
+		{
+			for( o=0;o<n;o++)
+			{
+				if(array3[k]==pro[o].processid)
+				{
+					array4[k]=1+(double)(t-pro[o].arrivaltime)/pro[o].bursttime;
+					printf("\n\t\t\tP%d : %f",pro[o].processid,array4[k]);
+                    if(array4[k]<min)
+                    {
+                        min=array4[k];
+                        index=pro[o].processid;
+                    }
+				}
+
+			}
+		}
+		printf("\n\t\t\tProcess %d will run\n",index);
+

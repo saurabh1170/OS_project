@@ -1,53 +1,58 @@
-	if(0==pro[0].arrivaltime)
-	{
-	//printf(" 0 ");
-	}
-	else
-	{
-		//printf(" 0  %d",pro[0].arrivaltime);
-		t=t+pro[0].arrivaltime;
-	}
-	t=t+pro[0].bursttime;
-	//printf("  P%d  %d",pro[0].processid,t);
-	completiontime[1]=t;
-
-    do
-	{
-		int tmp=0,j,u;
-		for( j=0;j<m;j++)
+sorting(array4,array3,tmp1-1);
+		int f=array3[0],i;
+		for(i=0;i<n;i++)
 		{
-			for( u=0;u<n;u++)
+			if(tmp!=0)
 			{
-				if(array2[j]==pro[u].processid)
+				if(pro[i].processid==f)
 				{
-					if(pro[u].arrivaltime<=t)
+					t=t+pro[i].bursttime;
+				}
+			}
+		}
+		int flag=5;
+		if(tmp==0 && v>0)
+		{
+			for(i=0;i<n;i++)
+			{
+				if(t<pro[i].arrivaltime)
+				{
+     				t=pro[i].arrivaltime+pro[i].bursttime;
+					//printf("  %d  P%d  %d",pro[i].arrivaltime,pro[i].processid,t);
+
+					break;
+					flag=9;
+				}
+			}
+		}
+		else
+		{
+			//printf("  P%d  %d",f,t);
+			completiontime[f]=t;//2
+		//	printf("**%d",ct[f]);//3
+			v--;
+		}
+	      	for(i=0; i<m; i++)
+			{
+				if(array2[i]==f)
+				{
+					for(j=i; j<(m-1); j++)
 					{
-						array3[tmp++]=pro[u].processid;
+						array2[j]=array2[j+1];
 					}
+			    	break;
 				}
 			}
-		}
-		int tmp1=tmp+1;
-		double array4[tmp1];
-		int tmp2=4,k,o;
-		int index=0;
-		double min=100;
-		for( k=0;k<tmp1-1;k++)
-		{
-			for( o=0;o<n;o++)
-			{
-				if(array3[k]==pro[o].processid)
-				{
-					array4[k]=1+(double)(t-pro[o].arrivaltime)/pro[o].bursttime;
-					printf("\n\t\t\tP%d : %f",pro[o].processid,array4[k]);
-                    if(array4[k]<min)
-                    {
-                        min=array4[k];
-                        index=pro[o].processid;
-                    }
-				}
+			m=m-1;
 
-			}
-		}
-		printf("\n\t\t\tProcess %d will run\n",index);
+
+        	}
+
+	while(m>0);
+
+	    float sum1=0,sum2=0;
+		for (i=0;i<n;i++)
+		{
+			turnaroundtime[i]=completiontime[i+1]-pro[i].arrivaltime;
+        }
 
